@@ -1,4 +1,4 @@
-// AI credit KPkiller1671 https://www.youtube.com/watch?v=aWhb9dr1jNw
+// AI & structure credit KPkiller1671 https://www.youtube.com/watch?v=aWhb9dr1jNw
 
 var tiles = document.getElementsByClassName("tile");
 var buttons = document.getElementsByClassName("button");
@@ -12,6 +12,9 @@ var COMPUTER = true;
 var HUMVAL = -1;
 var COMVAL = 1;
 
+var humSymbol = "X";
+var comSymbol = "O";
+
 var winMatrix = [[0, 1, 2],
 				[3, 4, 5],
 				[6, 7, 8],
@@ -21,9 +24,19 @@ var winMatrix = [[0, 1, 2],
 				[0, 4, 8],
 				[2, 4, 6]];
 
+// Choose X or O credit: https://github.com/pankaja-shree/chingu-fcc-speedrun-challenge/blob/master/frontend/tictactoe-game/scripts.js
+function playerSymbol(textVal) {
+	humSymbol = textVal.charAt(0);
+	comSymbol = textVal.charAt(1);
+
+	if (comSymbol == 'X'){
+		callAI();
+	}
+}
+
 function reset() {
 	for (var x = 0; x < 9; x++) {
-		tiles[x].style.background = "#fff";
+		tiles[x].innerHTML = "&nbsp";
 		state[x] = 0;
 	}
 
@@ -64,10 +77,12 @@ function set(index, player) {
 		buttons[1].style.width = "32vh";
 
 		if (player == HUMAN){
-			tiles[index].style.background = "#22f";
+			tiles[index].style.color = "#22f";
+			tiles[index].innerHTML = humSymbol;
 			state[index] = HUMVAL;
 		} else {
-			tiles[index].style.background = "#f22";
+			tiles[index].style.color = "#f22";
+			tiles[index].innerHTML = comSymbol;
 			state[index] = COMVAL;
 		}
 
@@ -108,12 +123,12 @@ function checkFull(board) {
 }
 
 function callAI(){
-	aiturn(state, 0, COMPUTER);
+	miniMax(state, 0, COMPUTER);
 }
 
-function aiturn(board, depth, player) {
+function miniMax(board, depth, player) {
 	if (checkWin(board, !player)){
-		return -10 - depth;
+		return -10 + depth;
 	} 
 	
 	if (checkFull(board)){
@@ -130,7 +145,7 @@ function aiturn(board, depth, player) {
 			var newBoard = board.slice();
 			newBoard[m] = value;
 
-			var moveVal = -aiturn(newBoard, depth + 1, !player);
+			var moveVal = -miniMax(newBoard, depth + 1, !player);
 
 			if (moveVal > max) {
 				max = moveVal;

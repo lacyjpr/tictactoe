@@ -10,7 +10,7 @@
 		<title>Tic Tac Toe</title>
 		
 		<link rel="stylesheet" href="css/style.css">
-		<script src="js/main.js"></script>
+		
 	</head>
 
 	<body>
@@ -18,6 +18,13 @@
 		<div id="main">
 
 			<div id="board">
+
+				<div id="player">
+					<p>Play as:</p>
+					<div class="button" onclick="playerSymbol( 'XO' )">X</div>
+					<div class="button" onclick="playerSymbol( 'OX' )">O</div>
+
+				</div>
 
 				<div class="tile" onclick="claim(this)"></div>
 				<div class="tile" onclick="claim(this)"></div>
@@ -37,5 +44,5 @@
 
 
 	</body>
-	
+	<script src="js/main.js"></script>
 </html>

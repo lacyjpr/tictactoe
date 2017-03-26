@@ -1,12 +1,17 @@
 html, body {
+	font-family: arial, sans-serif;
 	padding: 0;
 	margin: 0;
 
 	background: #111;
-	text-transform: uppercase;
 
 	color: #111;
 	font-size: 1.5vh;
+	
+}
+
+p {
+	color: #fff;
 }
 
 #main {
