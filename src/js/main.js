@@ -1,7 +1,8 @@
-// AI & structure credit KPkiller1671 https://www.youtube.com/watch?v=aWhb9dr1jNw
+// AI & structure major credit to KPkiller1671 https://www.youtube.com/watch?v=aWhb9dr1jNw
 
 var tiles = document.getElementsByClassName("tile");
 var buttons = document.getElementsByClassName("button");
+
 
 var state = [0,0,0,0,0,0,0,0,0];
 var game = true;
@@ -24,7 +25,12 @@ var winMatrix = [[0, 1, 2],
 				[0, 4, 8],
 				[2, 4, 6]];
 
-// Choose X or O credit: https://github.com/pankaja-shree/chingu-fcc-speedrun-challenge/blob/master/frontend/tictactoe-game/scripts.js
+buttons[2].style.width = "32vh";
+document.getElementById("win").style.display = "none";
+document.getElementById("lose").style.display = "none";
+document.getElementById("draw").style.display = "none";
+
+// Choose X or O credit: Pankajashree R https://github.com/pankaja-shree/chingu-fcc-speedrun-challenge/blob/master/frontend/tictactoe-game/scripts.js
 function playerSymbol(textVal) {
 	humSymbol = textVal.charAt(0);
 	comSymbol = textVal.charAt(1);
@@ -36,18 +42,13 @@ function playerSymbol(textVal) {
 
 function reset() {
 	for (var x = 0; x < 9; x++) {
-		tiles[x].innerHTML = "&nbsp";
+		tiles[x].innerHTML = "";
 		state[x] = 0;
 	}
-
-	for (var y = 0; y < 2; y++) {
-		buttons[y].style.width = "15.5vh";
-		
-		buttons[y].style.margin = "0.5vh";
-		buttons[y].style.opacity = "1";
-	}
-
 	game = true;
+	document.getElementById("win").style.display = "none";
+	document.getElementById("lose").style.display = "none";
+	document.getElementById("draw").style.display = "none";
 }
 
 function claim(clicked) {
@@ -70,11 +71,6 @@ function set(index, player) {
 	}
 
 	if (state[index] == 0) {
-		buttons[0].style.width = "0";
-		buttons[0].style.margin = "0";
-		buttons[0].style.opacity = "0";
-
-		buttons[1].style.width = "32vh";
 
 		if (player == HUMAN){
 			tiles[index].style.color = "#22f";
@@ -86,7 +82,18 @@ function set(index, player) {
 			state[index] = COMVAL;
 		}
 
+		// Display Win Lose or Draw credit Pankajashree R https://github.com/pankaja-shree/chingu-fcc-speedrun-challenge/blob/master/frontend/tictactoe-game/scripts.js
+		if (checkFull(state)) {
+			document.getElementById("draw").style.display = "block";
+		}
+
 		if (checkWin(state, player)){
+			if (player == HUMAN){
+				document.getElementById("win").style.display = "block";
+
+			} else {
+				document.getElementById("lose").style.display = "block";
+			}
 			game = false;
 		}
 	}
