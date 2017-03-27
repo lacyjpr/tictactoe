@@ -46,6 +46,8 @@ function reset() {
 		state[x] = 0;
 	}
 	game = true;
+	humSymbol = "X";
+	comSymbol = "O";
 	document.getElementById("win").style.display = "none";
 	document.getElementById("lose").style.display = "none";
 	document.getElementById("draw").style.display = "none";
