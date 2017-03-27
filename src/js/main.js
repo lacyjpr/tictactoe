@@ -25,6 +25,10 @@ var winMatrix = [[0, 1, 2],
 				[0, 4, 8],
 				[2, 4, 6]];
 
+var win = new Audio("/tictactoe/media/win.mp3");
+var lose = new Audio("/tictactoe/media/lose.mp3")
+var draw = new Audio("/tictactoe/media/draw.mp3")
+
 buttons[2].style.width = "32vh";
 document.getElementById("win").style.display = "none";
 document.getElementById("lose").style.display = "none";
@@ -87,14 +91,17 @@ function set(index, player) {
 		// Display Win Lose or Draw credit Pankajashree R https://github.com/pankaja-shree/chingu-fcc-speedrun-challenge/blob/master/frontend/tictactoe-game/scripts.js
 		if (checkFull(state)) {
 			document.getElementById("draw").style.display = "block";
+			draw.play();
 		}
 
 		if (checkWin(state, player)){
 			if (player == HUMAN){
 				document.getElementById("win").style.display = "block";
+				win.play();
 
 			} else {
 				document.getElementById("lose").style.display = "block";
+				lose.play()
 			}
 			game = false;
 		}
