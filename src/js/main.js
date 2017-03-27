@@ -26,8 +26,8 @@ var winMatrix = [[0, 1, 2],
 				[2, 4, 6]];
 
 var win = new Audio("/tictactoe/media/win.mp3");
-var lose = new Audio("/tictactoe/media/lose.mp3")
-var draw = new Audio("/tictactoe/media/draw.mp3")
+var lose = new Audio("/tictactoe/media/lose.mp3");
+var draw = new Audio("/tictactoe/media/draw.mp3");
 
 buttons[2].style.width = "32vh";
 document.getElementById("win").style.display = "none";
@@ -101,7 +101,7 @@ function set(index, player) {
 
 			} else {
 				document.getElementById("lose").style.display = "block";
-				lose.play()
+				lose.play();
 			}
 			game = false;
 		}
