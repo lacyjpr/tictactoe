@@ -18,6 +18,14 @@ p {
 	font-size: 4vh;
 }
 
+h1 {
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	color: #fff;
+	font-size: 7vh;
+}
+
 #main {
 	margin: 0;
 	padding: 0;
