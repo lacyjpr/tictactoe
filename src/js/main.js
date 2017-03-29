@@ -1,15 +1,5 @@
 // AI & structure major credit to KPkiller1671 https://www.youtube.com/watch?v=aWhb9dr1jNw
 
-// get empty cells
-// this.emptyCells = function() {
-//     var empties = [];
-//     for (let i = 0; i < 9; i++) {
-//       if (board[i]==0) empties.push(i);
-//     }
-//     return empties;
-
-
-
 var tiles = document.getElementsByClassName("tile");
 
 var state = [0,0,0,0,0,0,0,0,0];
@@ -25,6 +15,7 @@ var humSymbol = "X";
 var comSymbol = "O";
 
 var difficulty = "easy";
+var empties = [];
 
 var winMatrix = [[0, 1, 2],
 				[3, 4, 5],
@@ -35,9 +26,9 @@ var winMatrix = [[0, 1, 2],
 				[0, 4, 8],
 				[2, 4, 6]];
 
-var win = new Audio("/tictactoe/media/win.mp3");
-var lose = new Audio("/tictactoe/media/lose.mp3");
-var draw = new Audio("/tictactoe/media/draw.mp3");
+var win = new Audio("/media/win.mp3");
+var lose = new Audio("/media/lose.mp3");
+var draw = new Audio("/media/draw.mp3");
 
 document.getElementById("win").style.display = "none";
 document.getElementById("lose").style.display = "none";
@@ -54,9 +45,7 @@ function playerSymbol(textVal) {
 }
 
 function setDifficulty(val) {
-	console.log("difficulty set");
 	difficulty = val.value;
-	console.log(difficulty);
 }
 
 
@@ -155,8 +144,43 @@ function checkFull(board) {
 }
 
 function callAI(){
-	miniMax(state, 0, COMPUTER);
+	console.log("ai called")
+	if (difficulty == "easy") {
+		randomMove();
+		return;
+	} 
+	if (difficulty == "medium"){
+		if (Math.random() * 100 <= 50){
+			miniMax(state, 0, COMPUTER);
+			return;
+		} else {
+			randomMove();
+			return;
+		}
+	} else {
+		miniMax(state, 0, COMPUTER);
+	}
+	
 }
+
+function getEmpties() {
+	empties = [];
+	for (var n = 0; n < 9; n++){
+		if (state[n] == 0) {
+			empties.push(n);
+			console.log("empties " + empties);
+			console.log("state " + state);
+		}
+	}
+}
+
+function randomMove() {
+	getEmpties();
+	var randomCell = empties[Math.floor(Math.random() * empties.length)];
+	console.log(randomCell);
+	set(randomCell, COMPUTER);
+}
+
 
 function miniMax(board, depth, player) {
 	if (checkWin(board, !player)){
