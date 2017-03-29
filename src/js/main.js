@@ -94,7 +94,7 @@ function set(index, player) {
 		}
 
 		// Display Win Lose or Draw credit Pankajashree R https://github.com/pankaja-shree/chingu-fcc-speedrun-challenge/blob/master/frontend/tictactoe-game/scripts.js
-		if (!checkWin && checkFull(state)) {
+		if (!checkWin(state, player) && checkFull(state)) {
 			document.getElementById("draw").style.display = "block";
 			draw.play();
 		}
