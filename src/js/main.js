@@ -94,7 +94,7 @@ function set(index, player) {
 		}
 
 		// Display Win Lose or Draw credit Pankajashree R https://github.com/pankaja-shree/chingu-fcc-speedrun-challenge/blob/master/frontend/tictactoe-game/scripts.js
-		if (checkFull(state)) {
+		if (!checkWin && checkFull(state)) {
 			document.getElementById("draw").style.display = "block";
 			draw.play();
 		}
@@ -168,8 +168,6 @@ function getEmpties() {
 	for (var n = 0; n < 9; n++){
 		if (state[n] == 0) {
 			empties.push(n);
-			console.log("empties " + empties);
-			console.log("state " + state);
 		}
 	}
 }
@@ -177,7 +175,6 @@ function getEmpties() {
 function randomMove() {
 	getEmpties();
 	var randomCell = empties[Math.floor(Math.random() * empties.length)];
-	console.log(randomCell);
 	set(randomCell, COMPUTER);
 }
 
