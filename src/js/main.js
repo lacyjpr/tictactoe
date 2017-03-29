@@ -26,9 +26,9 @@ var winMatrix = [[0, 1, 2],
 				[0, 4, 8],
 				[2, 4, 6]];
 
-var win = new Audio("/media/win.mp3");
-var lose = new Audio("/media/lose.mp3");
-var draw = new Audio("/media/draw.mp3");
+var win = new Audio("/tictactoe/media/win.mp3");
+var lose = new Audio("/tictactoe/media/lose.mp3");
+var draw = new Audio("/tictactoe/media/draw.mp3");
 
 document.getElementById("win").style.display = "none";
 document.getElementById("lose").style.display = "none";
