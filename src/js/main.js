@@ -1,7 +1,17 @@
 // AI & structure major credit to KPkiller1671 https://www.youtube.com/watch?v=aWhb9dr1jNw
 
+// get empty cells
+// this.emptyCells = function() {
+//     var empties = [];
+//     for (let i = 0; i < 9; i++) {
+//       if (board[i]==0) empties.push(i);
+//     }
+//     return empties;
+
+
+
 var tiles = document.getElementsByClassName("tile");
-var buttons = document.getElementsByClassName("button");
+//var buttons = document.getElementsByClassName("button");
 
 
 var state = [0,0,0,0,0,0,0,0,0];
@@ -29,7 +39,6 @@ var win = new Audio("/tictactoe/media/win.mp3");
 var lose = new Audio("/tictactoe/media/lose.mp3");
 var draw = new Audio("/tictactoe/media/draw.mp3");
 
-buttons[2].style.width = "32vh";
 document.getElementById("win").style.display = "none";
 document.getElementById("lose").style.display = "none";
 document.getElementById("draw").style.display = "none";

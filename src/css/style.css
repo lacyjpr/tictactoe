@@ -81,3 +81,23 @@ h1 {
 
 }
 
+.reset {
+	padding: 0;
+	margin: 0.5vh;
+
+	height: 5vh;
+	width: 32vh;
+	line-height: 5vh;
+	vertical-align: middle;
+
+	background: #fff;
+	text-align: center;
+	border-radius: 5px;
+	cursor: pointer;
+
+	float: left;
+
+	font-size: 4vh;
+
+}
+
