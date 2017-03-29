@@ -11,8 +11,6 @@
 
 
 var tiles = document.getElementsByClassName("tile");
-//var buttons = document.getElementsByClassName("button");
-
 
 var state = [0,0,0,0,0,0,0,0,0];
 var game = true;
@@ -25,6 +23,8 @@ var COMVAL = 1;
 
 var humSymbol = "X";
 var comSymbol = "O";
+
+var difficulty = "easy";
 
 var winMatrix = [[0, 1, 2],
 				[3, 4, 5],
@@ -52,6 +52,13 @@ function playerSymbol(textVal) {
 		callAI();
 	}
 }
+
+function setDifficulty(val) {
+	console.log("difficulty set");
+	difficulty = val.value;
+	console.log(difficulty);
+}
+
 
 function reset() {
 	for (var x = 0; x < 9; x++) {

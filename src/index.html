@@ -38,11 +38,11 @@
 				<div class="button reset" onclick="reset()">Reset</div>
 				
 				<div class="difficulty">
-					<input type="radio" name="difficulty" value="easy" checked="checked">Easy</input>
-					<input type="radio" name="difficulty" value="medium">Medium</input>
-					<input type="radio" name="difficulty" value="medium">Hard</input>
+					<input type="radio" name="difficulty" onclick="setDifficulty(this)" value="easy" checked="checked">Easy</input>
+					<input type="radio" name="difficulty" onclick="setDifficulty(this)" value="medium">Medium</input>
+					<input type="radio" name="difficulty" onclick="setDifficulty(this)" value="hard">Hard</input>
 				</div>
-				
+
 				<div class="display">
 					<h1 id="win">You Win!</h1>
 					<h1 id="lose">You Lose!</h1>
