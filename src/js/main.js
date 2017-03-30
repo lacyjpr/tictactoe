@@ -144,7 +144,6 @@ function checkFull(board) {
 }
 
 function callAI(){
-	console.log("ai called")
 	if (difficulty == "easy") {
 		randomMove();
 		return;
