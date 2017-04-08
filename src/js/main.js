@@ -1,12 +1,12 @@
 // AI & structure major credit to KPkiller1671 https://www.youtube.com/watch?v=aWhb9dr1jNw
 
-var tiles = document.getElementsByClassName("tile");
+var squares = document.getElementsByClassName("square");
 
 var state = [0,0,0,0,0,0,0,0,0];
 var game = true;
 
-var HUMAN = false;
-var COMPUTER = true;
+var human = false;
+var computer = true;
 
 var HUMVAL = -1;
 var COMVAL = 1;
@@ -51,7 +51,7 @@ function setDifficulty(val) {
 
 function reset() {
 	for (var x = 0; x < 9; x++) {
-		tiles[x].innerHTML = "";
+		squares[x].innerHTML = "";
 		state[x] = 0;
 	}
 	game = true;
@@ -62,15 +62,15 @@ function reset() {
 	document.getElementById("draw").style.display = "none";
 }
 
-function claim(clicked) {
+function take(clicked) {
 	if (!game) {
 		return;
 	}
 
 	for (var i = 0; i < 9; i++) {
 
-		if (tiles[i] == clicked && state[i] == 0){
-			set(i, HUMAN);
+		if (squares[i] == clicked && state[i] == 0){
+			set(i, human);
 			callAI();
 		}
 	}
@@ -83,13 +83,13 @@ function set(index, player) {
 
 	if (state[index] == 0) {
 
-		if (player == HUMAN){
-			tiles[index].style.color = "#22f";
-			tiles[index].innerHTML = humSymbol;
+		if (player == human){
+			squares[index].style.color = "#22f";
+			squares[index].innerHTML = humSymbol;
 			state[index] = HUMVAL;
 		} else {
-			tiles[index].style.color = "#f22";
-			tiles[index].innerHTML = comSymbol;
+			squares[index].style.color = "#f22";
+			squares[index].innerHTML = comSymbol;
 			state[index] = COMVAL;
 		}
 
@@ -100,7 +100,7 @@ function set(index, player) {
 		}
 
 		if (checkWin(state, player)){
-			if (player == HUMAN){
+			if (player == human){
 				document.getElementById("win").style.display = "block";
 				win.play();
 
@@ -114,7 +114,7 @@ function set(index, player) {
 }
 
 function checkWin(board, player) {
-	var value = player == HUMAN ? HUMVAL : COMVAL;
+	var value = player == human ? HUMVAL : COMVAL;
 
 	for (var j = 0; j < 8; j++) {
 		var win = true;
@@ -150,14 +150,14 @@ function callAI(){
 	} 
 	if (difficulty == "medium"){
 		if (Math.random() * 100 <= 50){
-			miniMax(state, 0, COMPUTER);
+			miniMax(state, 0, computer);
 			return;
 		} else {
 			randomMove();
 			return;
 		}
 	} else {
-		miniMax(state, 0, COMPUTER);
+		miniMax(state, 0, computer);
 	}
 	
 }
@@ -174,7 +174,7 @@ function getEmpties() {
 function randomMove() {
 	getEmpties();
 	var randomCell = empties[Math.floor(Math.random() * empties.length)];
-	set(randomCell, COMPUTER);
+	set(randomCell, computer);
 }
 
 
@@ -187,7 +187,7 @@ function miniMax(board, depth, player) {
 		return 0;
 	}
 
-	var value = player == HUMAN ? HUMVAL : COMVAL;
+	var value = player == human ? HUMVAL : COMVAL;
 
 	var max = -Infinity;
 	var index = 0;
@@ -208,7 +208,7 @@ function miniMax(board, depth, player) {
 	}
 
 	if(depth == 0){
-		set(index, COMPUTER);
+		set(index, computer);
 	}
 
 	return max;
