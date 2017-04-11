@@ -1,34 +1,29 @@
 // AI & structure major credit to KPkiller1671 https://www.youtube.com/watch?v=aWhb9dr1jNw
 
-var squares = document.getElementsByClassName("square");
-
-var state = [0,0,0,0,0,0,0,0,0];
-var game = true;
-
-var human = false;
-var computer = true;
-
-var HUMVAL = -1;
-var COMVAL = 1;
-
-var humSymbol = "X";
-var comSymbol = "O";
-
-var difficulty = "easy";
-var empties = [];
-
-var winMatrix = [[0, 1, 2],
+var game = {
+	squares: document.getElementsByClassName("square"),
+	board: [0,0,0,0,0,0,0,0,0],
+	running: true,
+	human: false,
+	computer: true,
+	HUMVAL: -1,
+	COMVAL:  1,
+	humSymbol: "X",
+	comSymbol: "O",
+	difficulty: "easy",
+	empties: [],
+	winMatrix: [[0, 1, 2],
 				[3, 4, 5],
 				[6, 7, 8],
 				[0, 3, 6],
 				[1, 4, 7],
 				[2, 5, 8],
 				[0, 4, 8],
-				[2, 4, 6]];
-
-var win = new Audio("/tictactoe/media/win.mp3");
-var lose = new Audio("/tictactoe/media/lose.mp3");
-var draw = new Audio("/tictactoe/media/draw.mp3");
+				[2, 4, 6]],
+	win: new Audio("/tictactoe/media/win.mp3"),
+	lose: new Audio("/tictactoe/media/lose.mp3"),
+	draw: new Audio("/tictactoe/media/draw.mp3"),			
+};
 
 document.getElementById("win").style.display = "none";
 document.getElementById("lose").style.display = "none";
@@ -36,91 +31,91 @@ document.getElementById("draw").style.display = "none";
 
 // Choose X or O credit: Pankajashree R https://github.com/pankaja-shree/chingu-fcc-speedrun-challenge/blob/master/frontend/tictactoe-game/scripts.js
 function playerSymbol(textVal) {
-	humSymbol = textVal.charAt(0);
-	comSymbol = textVal.charAt(1);
+	game.humSymbol = textVal.charAt(0);
+	game.comSymbol = textVal.charAt(1);
 
-	if (comSymbol == 'X'){
+	if (game.comSymbol == 'X'){
 		callAI();
 	}
 }
 
 function setDifficulty(val) {
-	difficulty = val.value;
+	game.difficulty = val.value;
 }
 
 
 function reset() {
 	for (var x = 0; x < 9; x++) {
-		squares[x].innerHTML = "";
-		state[x] = 0;
+		game.squares[x].innerHTML = "";
+		game.board[x] = 0;
 	}
-	game = true;
-	humSymbol = "X";
-	comSymbol = "O";
+	game.running = true;
+	game.humSymbol = "X";
+	game.comSymbol = "O";
 	document.getElementById("win").style.display = "none";
 	document.getElementById("lose").style.display = "none";
 	document.getElementById("draw").style.display = "none";
 }
 
 function take(clicked) {
-	if (!game) {
+	if (!game.running) {
 		return;
 	}
 
 	for (var i = 0; i < 9; i++) {
 
-		if (squares[i] == clicked && state[i] == 0){
-			set(i, human);
+		if (game.squares[i] == clicked && game.board[i] == 0){
+			set(i, game.human);
 			callAI();
 		}
 	}
 }
 
 function set(index, player) {
-	if (!game) {
+	if (!game.running) {
 		return;
 	}
 
-	if (state[index] == 0) {
+	if (game.board[index] == 0) {
 
-		if (player == human){
-			squares[index].style.color = "#22f";
-			squares[index].innerHTML = humSymbol;
-			state[index] = HUMVAL;
+		if (player == game.human){
+			game.squares[index].style.color = "#22f";
+			game.squares[index].innerHTML = game.humSymbol;
+			game.board[index] = game.HUMVAL;
 		} else {
-			squares[index].style.color = "#f22";
-			squares[index].innerHTML = comSymbol;
-			state[index] = COMVAL;
+			game.squares[index].style.color = "#f22";
+			game.squares[index].innerHTML = game.comSymbol;
+			game.board[index] = game.COMVAL;
 		}
 
 		// Display Win Lose or Draw credit Pankajashree R https://github.com/pankaja-shree/chingu-fcc-speedrun-challenge/blob/master/frontend/tictactoe-game/scripts.js
-		if (!checkWin(state, player) && checkFull(state)) {
+		if (!checkWin(game.board, player) && checkFull(game.board)) {
 			document.getElementById("draw").style.display = "block";
-			draw.play();
+			game.draw.play();
 		}
 
-		if (checkWin(state, player)){
-			if (player == human){
+		if (checkWin(game.board, player)){
+			if (player == game.human){
 				document.getElementById("win").style.display = "block";
-				win.play();
+				game.win.play();
 
 			} else {
 				document.getElementById("lose").style.display = "block";
-				lose.play();
+				game.lose.play();
 			}
-			game = false;
+			game.running = false;
 		}
 	}
 }
 
 function checkWin(board, player) {
-	var value = player == human ? HUMVAL : COMVAL;
+	var value = player == game.human ? game.HUMVAL : game.COMVAL;
 
 	for (var j = 0; j < 8; j++) {
 		var win = true;
 
 		for (var k = 0; k < 3; k++) {
-			if(board[winMatrix[j][k]] != value) {
+			if(board[game.winMatrix[j][k]] != value) {
 				win = false;
 				break;
 			}
@@ -144,40 +139,40 @@ function checkFull(board) {
 }
 
 function callAI(){
-	if (difficulty == "easy") {
+	if (game.difficulty == "easy") {
 		randomMove();
 		return;
 	} 
-	if (difficulty == "medium"){
+	if (game.difficulty == "medium"){
 		if (Math.random() * 100 <= 50){
-			miniMax(state, 0, computer);
+			miniMax(game.board, 0, game.computer);
 			return;
 		} else {
 			randomMove();
 			return;
 		}
 	} else {
-		miniMax(state, 0, computer);
+		miniMax(game.board, 0, game.computer);
 	}
 	
 }
 
 function getEmpties() {
-	empties = [];
+	game.empties = [];
 	for (var n = 0; n < 9; n++){
-		if (state[n] == 0) {
-			empties.push(n);
+		if (game.board[n] == 0) {
+			game.empties.push(n);
 		}
 	}
 }
 
 function randomMove() {
 	getEmpties();
-	var randomCell = empties[Math.floor(Math.random() * empties.length)];
-	set(randomCell, computer);
+	var randomCell = game.empties[Math.floor(Math.random() * game.empties.length)];
+	set(randomCell, game.computer);
 }
 
-
+// AI credit to KPkiller1671 https://www.youtube.com/watch?v=aWhb9dr1jNw
 function miniMax(board, depth, player) {
 	if (checkWin(board, !player)){
 		return -10 + depth;
@@ -187,7 +182,7 @@ function miniMax(board, depth, player) {
 		return 0;
 	}
 
-	var value = player == human ? HUMVAL : COMVAL;
+	var value = player == game.human ? game.HUMVAL : game.COMVAL;
 
 	var max = -Infinity;
 	var index = 0;
@@ -208,7 +203,7 @@ function miniMax(board, depth, player) {
 	}
 
 	if(depth == 0){
-		set(index, computer);
+		set(index, game.computer);
 	}
 
 	return max;
