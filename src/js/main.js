@@ -1,5 +1,6 @@
 // AI & structure major credit to KPkiller1671 https://www.youtube.com/watch?v=aWhb9dr1jNw
 
+// Game values
 var game = {
 	squares: document.getElementsByClassName("square"),
 	board: [0,0,0,0,0,0,0,0,0],
@@ -12,19 +13,13 @@ var game = {
 	comSymbol: "O",
 	difficulty: "easy",
 	empties: [],
-	winMatrix: [[0, 1, 2],
-				[3, 4, 5],
-				[6, 7, 8],
-				[0, 3, 6],
-				[1, 4, 7],
-				[2, 5, 8],
-				[0, 4, 8],
-				[2, 4, 6]],
+	winMatrix: [[0, 1, 2],[3, 4, 5],[6, 7, 8],[0, 3, 6],[1, 4, 7],[2, 5, 8],[0, 4, 8],[2, 4, 6]],
 	win: new Audio("/tictactoe/media/win.mp3"),
 	lose: new Audio("/tictactoe/media/lose.mp3"),
 	draw: new Audio("/tictactoe/media/draw.mp3"),			
 };
 
+// Hide win lose draw messages
 document.getElementById("win").style.display = "none";
 document.getElementById("lose").style.display = "none";
 document.getElementById("draw").style.display = "none";
@@ -43,7 +38,7 @@ function setDifficulty(val) {
 	game.difficulty = val.value;
 }
 
-
+// Reset game to original state
 function reset() {
 	for (var x = 0; x < 9; x++) {
 		game.squares[x].innerHTML = "";
@@ -57,6 +52,7 @@ function reset() {
 	document.getElementById("draw").style.display = "none";
 }
 
+// Take squares
 function take(clicked) {
 	if (!game.running) {
 		return;
@@ -71,6 +67,7 @@ function take(clicked) {
 	}
 }
 
+// Set squares
 function set(index, player) {
 	if (!game.running) {
 		return;
@@ -108,6 +105,7 @@ function set(index, player) {
 	}
 }
 
+// Check for win
 function checkWin(board, player) {
 	var value = player == game.human ? game.HUMVAL : game.COMVAL;
 
@@ -128,6 +126,7 @@ function checkWin(board, player) {
 	return false;
 }
 
+// Check for full board
 function checkFull(board) {
 	for (var l = 0; l < 9; l++) {
 		if (board[l] == 0) {
@@ -137,6 +136,7 @@ function checkFull(board) {
 
 	return true;
 }
+
 
 function callAI(){
 	if (game.difficulty == "easy") {
@@ -157,6 +157,7 @@ function callAI(){
 	
 }
 
+// Get empty squares
 function getEmpties() {
 	game.empties = [];
 	for (var n = 0; n < 9; n++){
@@ -166,18 +167,21 @@ function getEmpties() {
 	}
 }
 
+// Make a random move
 function randomMove() {
 	getEmpties();
 	var randomCell = game.empties[Math.floor(Math.random() * game.empties.length)];
 	set(randomCell, game.computer);
 }
 
-// AI credit to KPkiller1671 https://www.youtube.com/watch?v=aWhb9dr1jNw
+// Minimax AI credit to KPkiller1671 https://www.youtube.com/watch?v=aWhb9dr1jNw
 function miniMax(board, depth, player) {
+
+	// Terminal condition
 	if (checkWin(board, !player)){
 		return -10 + depth;
 	} 
-	
+	// Terminal condition
 	if (checkFull(board)){
 		return 0;
 	}
@@ -187,6 +191,7 @@ function miniMax(board, depth, player) {
 	var max = -Infinity;
 	var index = 0;
 
+	// Recurse through possible moves until a terminal condition is reached
 	for (var m = 0; m < 9; m++) {
 		if (board[m] == 0) {
 			var newBoard = board.slice();
@@ -201,7 +206,7 @@ function miniMax(board, depth, player) {
 		}
 
 	}
-
+	// Make the best possible move
 	if(depth == 0){
 		set(index, game.computer);
 	}
