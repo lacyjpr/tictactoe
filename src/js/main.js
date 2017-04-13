@@ -19,7 +19,7 @@ var game = {
 };
 
 //Dom elements
-var squares = document.getElementsByClassName("square"),
+var squares = document.getElementsByClassName("square");
 
 // Hide win lose draw messages
 document.getElementById("win").style.display = "none";
@@ -70,7 +70,7 @@ function take(clicked) {
 
 	for (var i = 0; i < 9; i++) {
 
-		if (game.squares[i] == clicked && game.board[i] == 0){
+		if (squares[i] == clicked && game.board[i] == 0){
 			set(i, game.human);
 			callAI();
 		}
@@ -86,12 +86,12 @@ function set(index, player) {
 	if (game.board[index] == 0) {
 
 		if (player == game.human){
-			game.squares[index].style.color = "#22f";
-			game.squares[index].innerHTML = game.humSymbol;
+			squares[index].style.color = "#22f";
+			squares[index].innerHTML = game.humSymbol;
 			game.board[index] = game.HUMVAL;
 		} else {
-			game.squares[index].style.color = "#f22";
-			game.squares[index].innerHTML = game.comSymbol;
+			squares[index].style.color = "#f22";
+			squares[index].innerHTML = game.comSymbol;
 			game.board[index] = game.COMVAL;
 		}
 
