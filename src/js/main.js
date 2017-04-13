@@ -1,5 +1,3 @@
-// AI & structure major credit to KPkiller1671 https://www.youtube.com/watch?v=aWhb9dr1jNw
-
 // Game values
 var game = {
 	board: [0,0,0,0,0,0,0,0,0],
@@ -20,32 +18,24 @@ var game = {
 
 // Dom elements
 var squares = document.getElementsByClassName("square");
-
-// Squares event listener credit http://stackoverflow.com/questions/17981437/how-to-add-event-listeners-to-an-array-of-objects
-for (var i = 0; i < squares.length; i++) {
-	(function(i) {
-		squares[i].addEventListener("click", function() {
-			console.log("you clicked " + i);
-			take(i);
-		});
-	})(i);
-}
+var playerX = document.getElementById("playerX");
+var playerO = document.getElementById("playerO");
 
 // Hide win lose draw messages
 document.getElementById("win").style.display = "none";
 document.getElementById("lose").style.display = "none";
 document.getElementById("draw").style.display = "none";
 
-// Choose X or O credit: Pankajashree R https://github.com/pankaja-shree/chingu-fcc-speedrun-challenge/blob/master/frontend/tictactoe-game/scripts.js
-function playerSymbol(textVal) {
-	game.humSymbol = textVal.charAt(0);
-	game.comSymbol = textVal.charAt(1);
+// Choose X or O credit:
 
-	if (game.comSymbol == 'X'){
-		callAI();
-	}
+// Squares event listener credit http://stackoverflow.com/questions/17981437/how-to-add-event-listeners-to-an-array-of-objects
+for (var i = 0; i < squares.length; i++) {
+	(function(i) {
+		squares[i].addEventListener("click", function() {
+			take(i);
+		});
+	})(i);
 }
-
 function setDifficulty(val) {
 	game.difficulty = val.value;
 }
@@ -66,15 +56,12 @@ function reset() {
 
 // Take squares credit KPkiller1671 https://www.youtube.com/watch?v=aWhb9dr1jNw
 function take(clicked) {
-	console.log("take called " + clicked);
 	if (!game.running) {
-		console.log("game not running");
 		return;
 	}
 
 	for (var j = 0; j < 9; j++) {
 		if (j == clicked && game.board[j] == 0){
-			console.log("squares[i] " + j);
 			set(clicked, game.human);
 			callAI();
 		}
@@ -83,14 +70,13 @@ function take(clicked) {
 
 // Set squares credit KPkiller1671 https://www.youtube.com/watch?v=aWhb9dr1jNw
 function set(index, player) {
-	console.log("set called " + index + " " + player);
 	if (!game.running) {
 		return;
 	}
 
 	if (game.board[index] == 0) {
 
-		if (player == false){
+		if (player == game.human) {
 			squares[index].style.color = "#22f";
 			squares[index].innerHTML = game.humSymbol;
 			game.board[index] = game.HUMVAL;
