@@ -21,6 +21,7 @@ var squares = document.getElementsByClassName("square");
 var playerX = document.getElementById("playerX");
 var playerO = document.getElementById("playerO");
 var $reset = document.getElementById("reset");
+var radios = document.forms["hardness"].elements["difficulty"];
 
 // Hide win lose draw messages
 document.getElementById("win").style.display = "none";
@@ -44,6 +45,13 @@ playerO.addEventListener("click", function() {
 $reset.addEventListener("click", function() {
 	reset();
 });
+
+// Set difficulty
+for (var x = 0; x < radios.length; x++) {
+	radios[x].onclick = function() {
+		game.difficulty = this.value;
+	};
+} 
 
 // Squares event listener credit http://stackoverflow.com/questions/17981437/how-to-add-event-listeners-to-an-array-of-objects
 for (var i = 0; i < squares.length; i++) {
