@@ -2,7 +2,6 @@
 
 // Game values
 var game = {
-	squares: document.getElementsByClassName("square"),
 	board: [0,0,0,0,0,0,0,0,0],
 	running: true,
 	human: false,
@@ -19,6 +18,18 @@ var game = {
 	draw: new Audio("/tictactoe/media/draw.mp3"),			
 };
 
+// Dom elements
+var squares = document.getElementsByClassName("square");
+
+// Squares event listener credit http://stackoverflow.com/questions/17981437/how-to-add-event-listeners-to-an-array-of-objects
+for (var i = 0; i < squares.length; i++) {
+	(function(i) {
+		squares[i].addEventListener("click", function() {
+			console.log("you clicked " + i);
+			take(i);
+		});
+	})(i);
+}
 
 // Hide win lose draw messages
 document.getElementById("win").style.display = "none";
@@ -42,7 +53,7 @@ function setDifficulty(val) {
 // Reset game to original state
 function reset() {
 	for (var x = 0; x < 9; x++) {
-		game.squares[x].innerHTML = "";
+		squares[x].innerHTML = "";
 		game.board[x] = 0;
 	}
 	game.running = true;
@@ -53,36 +64,39 @@ function reset() {
 	document.getElementById("draw").style.display = "none";
 }
 
-// Take squares
+// Take squares credit KPkiller1671 https://www.youtube.com/watch?v=aWhb9dr1jNw
 function take(clicked) {
+	console.log("take called " + clicked);
 	if (!game.running) {
+		console.log("game not running");
 		return;
 	}
 
-	for (var i = 0; i < 9; i++) {
-
-		if (game.squares[i] == clicked && game.board[i] == 0){
-			set(i, game.human);
+	for (var j = 0; j < 9; j++) {
+		if (j == clicked && game.board[j] == 0){
+			console.log("squares[i] " + j);
+			set(clicked, game.human);
 			callAI();
 		}
 	}
 }
 
-// Set squares
+// Set squares credit KPkiller1671 https://www.youtube.com/watch?v=aWhb9dr1jNw
 function set(index, player) {
+	console.log("set called " + index + " " + player);
 	if (!game.running) {
 		return;
 	}
 
 	if (game.board[index] == 0) {
 
-		if (player == game.human){
-			game.squares[index].style.color = "#22f";
-			game.squares[index].innerHTML = game.humSymbol;
+		if (player == false){
+			squares[index].style.color = "#22f";
+			squares[index].innerHTML = game.humSymbol;
 			game.board[index] = game.HUMVAL;
 		} else {
-			game.squares[index].style.color = "#f22";
-			game.squares[index].innerHTML = game.comSymbol;
+			squares[index].style.color = "#f22";
+			squares[index].innerHTML = game.comSymbol;
 			game.board[index] = game.COMVAL;
 		}
 
@@ -106,7 +120,7 @@ function set(index, player) {
 	}
 }
 
-// Check for win
+// Check for win credit KPkiller1671 https://www.youtube.com/watch?v=aWhb9dr1jNw
 function checkWin(board, player) {
 	var value = player == game.human ? game.HUMVAL : game.COMVAL;
 
@@ -127,7 +141,7 @@ function checkWin(board, player) {
 	return false;
 }
 
-// Check for full board
+// Check for full board credit KPkiller1671 https://www.youtube.com/watch?v=aWhb9dr1jNw
 function checkFull(board) {
 	for (var l = 0; l < 9; l++) {
 		if (board[l] == 0) {
