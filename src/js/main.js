@@ -2,7 +2,6 @@
 
 // Game values
 var game = {
-	squares: document.getElementsByClassName("square"),
 	board: [0,0,0,0,0,0,0,0,0],
 	running: true,
 	human: false,
@@ -18,6 +17,9 @@ var game = {
 	lose: new Audio("/tictactoe/media/lose.mp3"),
 	draw: new Audio("/tictactoe/media/draw.mp3"),			
 };
+
+//Dom elements
+var squares = document.getElementsByClassName("square"),
 
 // Hide win lose draw messages
 document.getElementById("win").style.display = "none";
@@ -52,7 +54,15 @@ function reset() {
 	document.getElementById("draw").style.display = "none";
 }
 
-// Take squares
+// Squares event listenters
+for (var i = 0; i < squares.length; i++) {
+	squares[i].addEventListener("click", function(){
+		take(i);
+	});
+}
+
+
+// Take squares credit to KPkiller1671 https://www.youtube.com/watch?v=aWhb9dr1jNw
 function take(clicked) {
 	if (!game.running) {
 		return;
@@ -67,7 +77,7 @@ function take(clicked) {
 	}
 }
 
-// Set squares
+// Set squares credit to KPkiller1671 https://www.youtube.com/watch?v=aWhb9dr1jNw
 function set(index, player) {
 	if (!game.running) {
 		return;
@@ -105,7 +115,7 @@ function set(index, player) {
 	}
 }
 
-// Check for win
+// Check for win credit to KPkiller1671 https://www.youtube.com/watch?v=aWhb9dr1jNw
 function checkWin(board, player) {
 	var value = player == game.human ? game.HUMVAL : game.COMVAL;
 
@@ -126,7 +136,7 @@ function checkWin(board, player) {
 	return false;
 }
 
-// Check for full board
+// Check for full board credit to KPkiller1671 https://www.youtube.com/watch?v=aWhb9dr1jNw
 function checkFull(board) {
 	for (var l = 0; l < 9; l++) {
 		if (board[l] == 0) {
