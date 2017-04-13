@@ -26,7 +26,20 @@ document.getElementById("win").style.display = "none";
 document.getElementById("lose").style.display = "none";
 document.getElementById("draw").style.display = "none";
 
-// Choose X or O credit:
+// Choose X
+playerX.addEventListener("click", function() {
+	game.humSymbol = "X";
+	game.comSymbol = "O";
+});
+
+// Choose O
+playerO.addEventListener("click", function() {
+	game.humSymbol = "O";
+	game.comSymbol = "X";
+	// X always goes first
+	callAI();
+});
+
 
 // Squares event listener credit http://stackoverflow.com/questions/17981437/how-to-add-event-listeners-to-an-array-of-objects
 for (var i = 0; i < squares.length; i++) {
