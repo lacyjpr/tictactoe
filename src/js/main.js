@@ -19,16 +19,7 @@ var game = {
 	draw: new Audio("/tictactoe/media/draw.mp3"),			
 };
 
-<<<<<<< HEAD
-//Dom elements
-var squares = document.getElementsByClassName("square");
 
-||||||| 1b3ada6... Restructure
-//Dom elements
-var squares = document.getElementsByClassName("square"),
-
-=======
->>>>>>> parent of 1b3ada6... Restructure
 // Hide win lose draw messages
 document.getElementById("win").style.display = "none";
 document.getElementById("lose").style.display = "none";
@@ -70,7 +61,7 @@ function take(clicked) {
 
 	for (var i = 0; i < 9; i++) {
 
-		if (squares[i] == clicked && game.board[i] == 0){
+		if (game.squares[i] == clicked && game.board[i] == 0){
 			set(i, game.human);
 			callAI();
 		}
@@ -86,12 +77,12 @@ function set(index, player) {
 	if (game.board[index] == 0) {
 
 		if (player == game.human){
-			squares[index].style.color = "#22f";
-			squares[index].innerHTML = game.humSymbol;
+			game.squares[index].style.color = "#22f";
+			game.squares[index].innerHTML = game.humSymbol;
 			game.board[index] = game.HUMVAL;
 		} else {
-			squares[index].style.color = "#f22";
-			squares[index].innerHTML = game.comSymbol;
+			game.squares[index].style.color = "#f22";
+			game.squares[index].innerHTML = game.comSymbol;
 			game.board[index] = game.COMVAL;
 		}
 
