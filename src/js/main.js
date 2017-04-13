@@ -61,7 +61,7 @@ function take(clicked) {
 	}
 
 	for (var j = 0; j < 9; j++) {
-		if (j == clicked && game.board[j] == 0){
+		if (j === clicked && game.board[j] === 0){
 			set(clicked, game.human);
 			callAI();
 		}
@@ -74,9 +74,9 @@ function set(index, player) {
 		return;
 	}
 
-	if (game.board[index] == 0) {
+	if (game.board[index] === 0) {
 
-		if (player == game.human) {
+		if (player === game.human) {
 			squares[index].style.color = "#22f";
 			squares[index].innerHTML = game.humSymbol;
 			game.board[index] = game.HUMVAL;
@@ -93,7 +93,7 @@ function set(index, player) {
 		}
 
 		if (checkWin(game.board, player)){
-			if (player == game.human){
+			if (player === game.human){
 				document.getElementById("win").style.display = "block";
 				game.win.play();
 
@@ -108,7 +108,7 @@ function set(index, player) {
 
 // Check for win credit KPkiller1671 https://www.youtube.com/watch?v=aWhb9dr1jNw
 function checkWin(board, player) {
-	var value = player == game.human ? game.HUMVAL : game.COMVAL;
+	var value = player === game.human ? game.HUMVAL : game.COMVAL;
 
 	for (var j = 0; j < 8; j++) {
 		var win = true;
@@ -130,7 +130,7 @@ function checkWin(board, player) {
 // Check for full board credit KPkiller1671 https://www.youtube.com/watch?v=aWhb9dr1jNw
 function checkFull(board) {
 	for (var l = 0; l < 9; l++) {
-		if (board[l] == 0) {
+		if (board[l] === 0) {
 			return false;
 		}
 	}
@@ -140,11 +140,11 @@ function checkFull(board) {
 
 
 function callAI(){
-	if (game.difficulty == "easy") {
+	if (game.difficulty === "easy") {
 		randomMove();
 		return;
 	} 
-	if (game.difficulty == "medium"){
+	if (game.difficulty === "medium"){
 		if (Math.random() * 100 <= 50){
 			miniMax(game.board, 0, game.computer);
 			return;
@@ -187,14 +187,14 @@ function miniMax(board, depth, player) {
 		return 0;
 	}
 
-	var value = player == game.human ? game.HUMVAL : game.COMVAL;
+	var value = player === game.human ? game.HUMVAL : game.COMVAL;
 
 	var max = -Infinity;
 	var index = 0;
 
 	// Recurse through possible moves until a terminal condition is reached
 	for (var m = 0; m < 9; m++) {
-		if (board[m] == 0) {
+		if (board[m] === 0) {
 			var newBoard = board.slice();
 			newBoard[m] = value;
 
@@ -208,7 +208,7 @@ function miniMax(board, depth, player) {
 
 	}
 	// Make the best possible move
-	if(depth == 0){
+	if(depth === 0){
 		set(index, game.computer);
 	}
 
