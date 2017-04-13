@@ -20,6 +20,7 @@ var game = {
 var squares = document.getElementsByClassName("square");
 var playerX = document.getElementById("playerX");
 var playerO = document.getElementById("playerO");
+var $reset = document.getElementById("reset");
 
 // Hide win lose draw messages
 document.getElementById("win").style.display = "none";
@@ -40,6 +41,9 @@ playerO.addEventListener("click", function() {
 	callAI();
 });
 
+$reset.addEventListener("click", function() {
+	reset();
+});
 
 // Squares event listener credit http://stackoverflow.com/questions/17981437/how-to-add-event-listeners-to-an-array-of-objects
 for (var i = 0; i < squares.length; i++) {
