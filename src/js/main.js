@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	// Game values
 	var game = {
 		board: [0,0,0,0,0,0,0,0,0],
-		running: true,
+		running: false,
 		human: false,
 		computer: true,
 		HUMVAL: -1,
@@ -31,17 +31,27 @@ document.addEventListener("DOMContentLoaded", function() {
 	document.getElementById("draw").style.display = "none";
 
 	// Choose X
-	playerX.addEventListener("click", function() {
-		game.humSymbol = "X";
-		game.comSymbol = "O";
+	playerX.addEventListener("click", function() { 
+		if (game.running === true) {
+			return;
+		} else {
+			game.humSymbol = "X";
+			game.comSymbol = "O";
+			game.running = true;
+		}
 	});
 
 	// Choose O
 	playerO.addEventListener("click", function() {
-		game.humSymbol = "O";
-		game.comSymbol = "X";
-		// X always goes first
-		callAI();
+		if (game.running === true) {
+			return;
+		} else {
+			game.humSymbol = "O";
+			game.comSymbol = "X";
+			game.running = true;
+			// X always goes first
+			callAI();
+		}
 	});
 
 	$reset.addEventListener("click", function() {
@@ -70,7 +80,7 @@ document.addEventListener("DOMContentLoaded", function() {
 			squares[x].innerHTML = "";
 			game.board[x] = 0;
 		}
-		game.running = true;
+		game.running = false;
 		game.humSymbol = "X";
 		game.comSymbol = "O";
 		document.getElementById("win").style.display = "none";
