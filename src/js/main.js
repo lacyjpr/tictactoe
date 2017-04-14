@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
-	
+
 	// Game values
 	var game = {
 		board: [0,0,0,0,0,0,0,0,0],
@@ -62,9 +62,6 @@ document.addEventListener("DOMContentLoaded", function() {
 				take(i);
 			});
 		})(i);
-	}
-	function setDifficulty(val) {
-		game.difficulty = val.value;
 	}
 
 	// Reset game to original state
@@ -189,7 +186,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	function getEmpties() {
 		game.empties = [];
 		for (var n = 0; n < 9; n++){
-			if (game.board[n] == 0) {
+			if (game.board[n] === 0) {
 				game.empties.push(n);
 			}
 		}
