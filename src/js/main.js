@@ -94,12 +94,12 @@ document.addEventListener("DOMContentLoaded", function() {
 			return;
 		}
 
-		for (var j = 0; j < 9; j++) {
-			if (j === clicked && game.board[j] === 0){
+		//for (var j = 0; j < 9; j++) {
+			if (game.board[clicked] === 0){
 				set(clicked, game.human);
 				callAI();
 			}
-		}
+		//}
 	}
 
 	// Set squares credit KPkiller1671 https://www.youtube.com/watch?v=aWhb9dr1jNw
