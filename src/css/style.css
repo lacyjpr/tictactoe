@@ -2,19 +2,16 @@ html, body {
 	font-family: arial, sans-serif;
 	padding: 0;
 	margin: 0;
-
-	background: #111;
-
-	color: #111;
+	background: #ffffff;
+	color: #ffffff;
 	font-size: 1.5vh;
-	
 }
 
 p {
 	margin: 0;
 	padding: 0;
 	text-align: center;
-	color: #fff;
+	color: #111111;
 	font-size: 4vh;
 }
 
@@ -22,11 +19,11 @@ h1 {
 	margin: 0;
 	padding: 0;
 	text-align: center;
-	color: #fff;
+	color: #111111;
 	font-size: 7vh;
 }
 
-#main {
+.main {
 	margin: 0;
 	padding: 0;
 	padding-top: 25vh;
@@ -34,7 +31,23 @@ h1 {
 	width: 100%;
 }
 
-#board {
+#playerX {
+	margin: 0 .5vh 2vh 0;
+}
+
+#playerX:active {
+	color: #2222ff;
+}
+
+#playerO {
+	margin: 0 0 2vh .5vh;
+}
+
+#playerO:active {
+	color: #ff2222;
+}
+
+.board {
 	padding: 0;
 	margin: auto;
 	width: 33vh;
@@ -43,16 +56,50 @@ h1 {
 
 .square {
 	padding: 0;
-	margin: 0.5vh;
 	height: 10vh;
 	line-height: 10vh;
 	width: 10vh;
-	border-radius: 5px;
-	background: #fff;
+	background: #ffffff;
 	text-align: center;
 	cursor: pointer;
 	float: left;
 	font-size: 9vh;
+}
+
+#top-left {
+	border-right: 1vh solid #111111;
+	border-bottom: 1vh solid #111111;
+}
+
+#top-middle {
+	border-bottom: 1vh solid #111111;
+}
+
+#top-right {
+	border-left: 1vh solid #111111;
+	border-bottom: 1vh solid #111111;
+}
+
+#middle-left {
+	border-right: 1vh solid #111111;
+}
+
+#middle-right {
+	border-left: 1vh solid #111111;
+}
+
+#bottom-left {
+	border-right: 1vh solid #111111;
+	border-top: 1vh solid #111111;
+}
+
+#bottom-middle {
+	border-top: 1vh solid #111111;
+}
+
+#bottom-right {
+	border-left: 1vh solid #111111;
+	border-top: 1vh solid #111111;
 }
 
 .button {
@@ -62,33 +109,34 @@ h1 {
 	width: 15.5vh;
 	line-height: 5vh;
 	vertical-align: middle;
-	background: #fff;
+	background: #111111;
 	text-align: center;
-	border-radius: 5px;
 	cursor: pointer;
 	float: left;
 	font-size: 4vh;
-
+	user-select: none;
 }
 
 #reset {
 	padding: 0;
-	margin: 0.5vh;
+	margin: 2vh 0 0 0;
 	height: 5vh;
 	width: 32vh;
 	line-height: 5vh;
 	vertical-align: middle;
-	background: #fff;
+	background: #111111;
 	text-align: center;
-	border-radius: 5px;
 	cursor: pointer;
 	float: left;
 	font-size: 4vh;
+}
 
+#reset:active {
+	color: #00ff00;
 }
 
 .difficulty {
-	color: #fff;
+	color: #111111;
 	text-align: center;
 	font-size: 2.5vh;
 }
