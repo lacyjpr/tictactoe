@@ -111,11 +111,11 @@ document.addEventListener("DOMContentLoaded", function() {
 		if (game.board[index] === 0) {
 
 			if (player === game.human) {
-				squares[index].style.color = "#22f";
+				squares[index].style.color = "#2222ff";
 				squares[index].innerHTML = game.humSymbol;
 				game.board[index] = game.HUMVAL;
 			} else {
-				squares[index].style.color = "#f22";
+				squares[index].style.color = "#ff2222";
 				squares[index].innerHTML = game.comSymbol;
 				game.board[index] = game.COMVAL;
 			}
