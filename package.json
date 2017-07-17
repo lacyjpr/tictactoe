@@ -1,0 +1,14 @@
+{
+  "name": "tictactoe",
+  "version": "1.0.0",
+  "main": "index.html",
+  "repository": "https://github.com/lacyjpr/tictactoe.git",
+  "author": "Jean-Paul Lacy <lacyjpr@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^3.7.0",
+    "gulp-htmlmin": "^3.0.0",
+    "gulp-uglify": "^3.0.0"
+  }
+}
